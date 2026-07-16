@@ -210,20 +210,191 @@
             margin-top: 2px;
         }
 
-        /* Dropdown Container */
-        .dropdown-container {
-            position: relative;
-            margin-bottom: 15px;
-        }
-
-        .mc-dropdown {
+        /* Static version info */
+        .mc-static-version-info {
             background-color: #0f131a;
             border: 1px solid #3e4e68;
-            color: #fff;
+            color: #a0aec0;
             padding: 10px 12px;
             font-size: 0.85rem;
             border-radius: 4px;
             width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .mc-static-version-info strong {
+            color: #fff;
+        }
+
+        /* Modernized Play Button */
+        .mc-btn-play {
+            display: block;
+            background: linear-gradient(135deg, #479a2e 0%, #347221 100%);
+            border: none;
+            outline: none;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            padding: 14px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(52, 114, 33, 0.4);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        .mc-btn-play:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #56b339 0%, #3c8527 100%);
+            box-shadow: 0 6px 20px rgba(71, 154, 46, 0.6);
+        }
+
+        .mc-btn-play:active {
+            transform: translateY(1px);
+        }
+
+        .mc-btn-play span {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: none;
+            text-shadow: none;
+            color: #d1fae5;
+            font-weight: normal;
+            margin-top: 2px;
+        }
+
+        /* Standard Disabled Download Button */
+        .btn-download {
+            display: block;
+            background-color: #202632;
+            color: #5a6a85;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-weight: bold;
+            border-radius: 6px;
+            border: 1px solid #2d3748;
+            transition: all 0.3s ease;
+            cursor: not-allowed;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .btn-download span {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: none;
+            color: #5a6a85;
+            margin-top: 2px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #141923;
+            color: #5a6a85;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Into The Flames</h1>
+        <p class="subtitle">Step into the fire. Save lives. Gear up for the ultimate firefighting experience.</p>
+        
+        <a href="https://buycoffee.to/ewewerban" target="_blank" class="btn-support">
+            ☕ Support Me (BuyCoffee)
+        </a>
+    </header>
+
+    <main class="chapters-container">
+        <h2 class="section-title">Game Chapters</h2>
+        
+        <div class="grid">
+            <div class="chapter-card">
+                <span class="status-badge" style="background-color: rgba(16, 185, 129, 0.15); color: #10b981; border-color: #10b981;">Ready to Download</span>
+                <div class="chapter-info">
+                    <h3>Chapter 1</h3>
+                    <p>First contact with the elements. Learn the basic controls, master firefighting equipment, and respond to your first emergencies.</p>
+                </div>
+                
+                <div class="mc-launcher-widget">
+                    <div class="mc-header">
+                        <div class="mc-icon">🔥</div>
+                        <div class="mc-meta">
+                            <div class="mc-version-name">Latest Release</div>
+                            <span class="mc-version-tag">Alpha 0.1</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mc-static-version-info">
+                        Active version: <strong>Alpha 0.1</strong>
+                    </div>
+
+                    <a href="https://drive.google.com/uc?export=download&confirm=t&id=1cj-HwCcKqZLQ2Nac_udlAVaFD8Pzu5ZR" id="downloadBtn" class="mc-btn-play" target="_blank">
+                        Play / Download
+                        <span>Windows (.exe)</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <span class="status-badge">Unavailable</span>
+                <div class="chapter-info">
+                    <h3>Chapter 2</h3>
+                    <p>More challenging scenarios in dense urban areas. Coordinate your actions and fight against time during advanced structural fires.</p>
+                </div>
+                <a href="#" class="btn-download" onclick="event.preventDefault();">
+                    Download Chapter 2
+                    <span>Coming soon to Windows</span>
+                </a>
+            </div>
+
+            <div class="chapter-card">
+                <span class="status-badge">Unavailable</span>
+                <div class="chapter-info">
+                    <h3>Chapter 3</h3>
+                    <p>The final missions and highly dangerous industrial disaster scenarios. Designed only for veteran firefighters.</p>
+                </div>
+                <a href="#" class="btn-download" onclick="event.preventDefault();">
+                    Download Chapter 3
+                    <span>Coming soon to Windows</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Into The Flames. All rights reserved.</p>
+        <p>Website built for GitHub Pages. Support the creator at <a href="https://buycoffee.to/ewewerban" target="_blank">buycoffee.to/ewewerban</a></p>
+    </footer>
+</body>
+</html>
