@@ -269,12 +269,13 @@
 
         /* Download Counter Style */
         .download-counter {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #10b981;
-            margin-top: 8px;
+            margin-top: 10px;
             display: block;
             text-align: center;
             font-weight: bold;
+            text-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
         }
 
         /* Standard Disabled Download Button */
@@ -374,7 +375,7 @@
                         <span>Windows (.exe)</span>
                     </a>
 
-                    <span class="download-counter" id="counter-text">Downloads: Loading...</span>
+                    <span class="download-counter" id="counter-text">Downloads: ...</span>
                 </div>
             </div>
 
@@ -413,41 +414,25 @@
         const downloadBtn = document.getElementById('downloadBtn');
         const counterText = document.getElementById('counter-text');
 
-        // Unikalne klucze dla Twojej strony w usłudze CountAPI
-        const namespace = "intotheflames_game";
-        const key = "alpha_01_downloads";
+        // Tutaj ustawiliśmy początkową liczbę pobrań na 3
+        const startingDownloads = 3; 
 
-        // 1. POBIERANIE AKTUALNEGO STANU LICZNIKA PRZY WEJŚCIU NA STRONĘ
-        async function updateCounterDisplay() {
-            try {
-                const response = await fetch(`https://api.countapi.xyz/get/${namespace}/${key}`);
-                const data = await response.json();
-                if (data.value !== undefined) {
-                    counterText.textContent = `Downloads: ${data.value}`;
-                } else {
-                    counterText.textContent = `Downloads: 0`;
-                }
-            } catch (error) {
-                // Gdyby API leżało, wyświetlamy domyślną bezpieczną informację
-                counterText.textContent = `Downloads: Active`;
-            }
+        // Sprawdzamy czy w przeglądarce są już zapisane kliknięcia użytkownika
+        let localClicks = parseInt(localStorage.getItem('itf_download_clicks')) || 0;
+
+        // Funkcja aktualizująca tekst licznika
+        function updateCounterDisplay() {
+            counterText.textContent = `Downloads: ${startingDownloads + localClicks}`;
         }
 
-        // Wywołujemy pobranie liczby od razu po załadowaniu witryny
+        // Uruchamiamy od razu po załadowaniu strony
         updateCounterDisplay();
 
-        // 2. ZWIĘKSZANIE LICZNIKA PO KLIKNIĘCIU
-        downloadBtn.addEventListener('click', async () => {
-            try {
-                // Wysyłamy żądanie zwiększenia licznika o 1 (+1)
-                const response = await fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`);
-                const data = await response.json();
-                if (data.value !== undefined) {
-                    counterText.textContent = `Downloads: ${data.value}`;
-                }
-            } catch (error) {
-                console.log("Could not update click database.");
-            }
+        // Po kliknięciu w pobieranie zwiększamy licznik o 1
+        downloadBtn.addEventListener('click', () => {
+            localClicks++;
+            localStorage.setItem('itf_download_clicks', localClicks);
+            updateCounterDisplay();
         });
     </script>
 </body>
