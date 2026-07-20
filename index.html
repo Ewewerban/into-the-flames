@@ -128,7 +128,7 @@
         .main-container {
             max-width: 1000px;
             width: 100%;
-            margin: 0 auto cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin: 0 auto;
             padding: 0 20px 60px 20px;
             flex: 1;
         }
@@ -364,7 +364,7 @@
 
         .screenshot-card {
             background: #171c27;
-            border: 1px solid var(--panel-border);
+            border: 2px dashed #333;
             border-radius: 10px;
             height: 180px;
             display: flex;
@@ -375,7 +375,6 @@
             font-style: italic;
             position: relative;
             overflow: hidden;
-            border: 2px dashed #333;
         }
 
         /* Author Profile card */
@@ -531,7 +530,6 @@
     </footer>
 
     <script>
-        // Dictionary Databases for Versions & File Identifiers
         const buildDatabase = {
             windows: [
                 { version: "Alpha 0.1", id: "1cj-HwCcKqZLQ2Nac_udlAVaFD8Pzu5ZR", ext: "Windows (.exe)" },
@@ -545,7 +543,6 @@
             ]
         };
 
-        // Language Translation Library
         const langPack = {
             pl: {
                 "main-title": "Into The Flames",
@@ -595,12 +592,10 @@
             }
         };
 
-        // Current App State Tracking variables
         let currentLanguage = 'pl';
         let currentOS = 'windows';
         let selectedBuild = buildDatabase.windows[0];
 
-        // Element Selectors
         const tabButtons = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
         const platformCards = document.querySelectorAll('.platform-card');
@@ -613,16 +608,13 @@
         const counterDisplay = document.getElementById('counter-display');
         const langBtn = document.getElementById('langBtn');
 
-        // --- 1. LANGUAGE SWAPPER CORE ---
         langBtn.addEventListener('click', () => {
             currentLanguage = currentLanguage === 'pl' ? 'en' : 'pl';
             langBtn.textContent = currentLanguage.toUpperCase();
             
-            // Re-render strings inside data-key containers
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.getAttribute('data-key');
                 if(langPack[currentLanguage][key]) {
-                    // If element is the main button, change only first child text node
                     if(key === 'btn-play') {
                         el.childNodes[0].textContent = langPack[currentLanguage][key];
                     } else {
@@ -633,7 +625,6 @@
             updateCounterView();
         });
 
-        // --- 2. TABS NAV SYSTEM ---
         tabButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 tabButtons.forEach(t => t.classList.remove('active'));
@@ -644,7 +635,6 @@
             });
         });
 
-        // --- 3. RE-POPULATE DROPDOWN LIST BASED ON OS ---
         function rebuildDropdown(os) {
             dropdownMenu.innerHTML = '';
             const builds = buildDatabase[os];
@@ -659,7 +649,6 @@
                 dropdownMenu.appendChild(item);
             });
 
-            // Auto-select latest index build for new platform
             selectBuildTarget(builds[0]);
         }
 
@@ -668,12 +657,10 @@
             selectedVersionLabel.textContent = `${buildObj.version} (${currentLanguage === 'pl' ? 'Aktywna' : 'Active'})`;
             extensionBadge.textContent = buildObj.ext;
             
-            // Build absolute direct download link syntax
             downloadBtn.href = `https://drive.google.com/uc?export=download&confirm=t&id=${buildObj.id}`;
             updateCounterView();
         }
 
-        // --- 4. PLATFORM SELECT CARDS ---
         platformCards.forEach(card => {
             card.addEventListener('click', () => {
                 platformCards.forEach(c => c.classList.remove('active'));
@@ -683,7 +670,6 @@
             });
         });
 
-        // --- 5. DROPDOWN VISIBILITY TOGGLES ---
         dropdownToggle.addEventListener('click', (e) => {
             e.stopPropagation();
             dropdownMenu.classList.toggle('show');
@@ -695,22 +681,19 @@
             dropdownArrow.classList.remove('open');
         });
 
-        // --- 6. LOCAL PERSISTENT DOWNLOAD COUNTER SYSTEM ---
         function getStorageKey() {
             return `itf_clicks_${currentOS}_${selectedBuild.version.replace(/\s+/g, '')}`;
         }
 
         function updateCounterView() {
-            const baseValue = 3; // Zaczynamy od 3 pobrań zgodnie z życzeniem
+            const baseValue = 3; 
             let persistentClicks = parseInt(localStorage.getItem(getStorageKey())) || 0;
             
             const txtPrefix = langPack[currentLanguage]["counter-txt"];
             counterDisplay.textContent = `${txtPrefix}${baseValue + persistentClicks}`;
         }
 
-        // Action click registration
         downloadBtn.addEventListener('click', (e) => {
-            // Check if mock placeholder link is used
             if(selectedBuild.id.includes("PROBKA_ID")) {
                 e.preventDefault();
                 alert(currentLanguage === 'pl' 
@@ -726,9 +709,7 @@
             updateCounterView();
         });
 
-        // Initial setup run upon framework mount
         rebuildDropdown('windows');
-
     </script>
 </body>
 </html>
