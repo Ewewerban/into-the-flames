@@ -1,439 +1,734 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Into The Flames - Official Website</title>
+    <title>Into The Flames - Official Hub</title>
     <style>
         :root {
-            --bg-color: #0b0c10;
-            --card-bg: #141923;
-            --card-border: #2a3547;
+            --bg-color: #08090c;
+            --panel-bg: #11141c;
+            --panel-border: #222936;
             --primary-color: #ff4c29;
             --primary-hover: #ff683b;
-            --text-main: #f5f5f5;
-            --text-muted: #8fa0b7;
+            --primary-glow: rgba(255, 76, 41, 0.4);
+            --text-main: #f5f6f8;
+            --text-muted: #7e8b9b;
+            --green-btn: linear-gradient(135deg, #479a2e 0%, #347221 100%);
+            --green-hover: linear-gradient(135deg, #56b339 0%, #3c8527 100%);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.6;
             overflow-x: hidden;
-        }
-
-        /* Hero Section */
-        header {
-            position: relative;
-            height: 45vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+        }
+
+        /* Top Bar & Language Switcher */
+        .top-bar {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
             padding: 20px;
-            background: linear-gradient(180deg, rgba(11, 12, 16, 0.4) 0%, rgba(11, 12, 16, 1) 100%),
-                        radial-gradient(circle, rgba(255, 76, 41, 0.12) 0%, rgba(0,0,0,0) 70%);
-            border-bottom: 2px solid var(--primary-color);
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Hero Header */
+        header {
+            text-align: center;
+            padding: 20px 20px 40px 20px;
+            background: radial-gradient(circle, rgba(255, 76, 41, 0.08) 0%, rgba(0,0,0,0) 70%);
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
+            font-weight: 900;
             color: #fff;
-            text-shadow: 0 0 10px rgba(255, 76, 41, 0.7), 0 0 20px rgba(255, 76, 41, 0.5);
+            text-shadow: 0 0 15px var(--primary-glow);
             margin-bottom: 10px;
         }
 
         .subtitle {
             font-size: 1.1rem;
-            color: #aaa;
-            margin-bottom: 25px;
+            color: var(--text-muted);
             max-width: 600px;
+            margin: 0 auto 30px auto;
         }
 
-        /* Support Button */
-        .btn-support {
-            display: inline-flex;
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            background: var(--panel-bg);
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid var(--panel-border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 12px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            color: #fff;
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        /* Main Container & Tab Content */
+        .main-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            padding: 0 20px 60px 20px;
+            flex: 1;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Launcher Hub Layout (Download Tab) */
+        .launcher-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 30px;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .info-side h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .info-side p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .features-list {
+            list-style: none;
+        }
+
+        .features-list li {
+            margin-bottom: 12px;
+            display: flex;
             align-items: center;
             gap: 10px;
-            background: linear-gradient(135deg, #ff4c29 0%, #ff2a00 100%);
-            color: #fff;
-            text-decoration: none;
-            padding: 14px 30px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(255, 76, 41, 0.4);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-transform: uppercase;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-support:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(255, 76, 41, 0.6);
-        }
-
-        /* Main Container */
-        .chapters-container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            text-transform: uppercase;
-            margin-bottom: 40px;
-            letter-spacing: 2px;
-            color: #fff;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: var(--primary-color);
-            margin: 10px auto 0;
-            box-shadow: 0 0 8px var(--primary-color);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        /* Chapter Card */
-        .chapter-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 25px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 460px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .chapter-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-color);
-        }
-
-        .status-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: rgba(239, 68, 68, 0.15);
-            color: #ef4444;
-            border: 1px solid #ef4444;
-            padding: 4px 12px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 20px;
-            letter-spacing: 1px;
-        }
-
-        .chapter-info h3 {
-            font-size: 1.6rem;
-            margin-top: 15px;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-
-        .chapter-info p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        /* Minecraft-styled Launcher Section */
-        .mc-launcher-widget {
-            background-color: #1a222f;
-            border: 2px solid #2d3748;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-        }
-
-        .mc-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #2d3748;
-            padding-bottom: 10px;
-        }
-
-        .mc-icon {
-            font-size: 1.8rem;
-            background: #232d3f;
-            padding: 5px 10px;
-            border-radius: 6px;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
-        }
-
-        .mc-meta {
-            text-align: left;
-        }
-
-        .mc-version-name {
-            font-weight: bold;
-            color: #fff;
             font-size: 0.95rem;
         }
 
-        .mc-version-tag {
-            font-size: 0.75rem;
-            color: #10b981;
-            background-color: rgba(16, 185, 129, 0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-top: 2px;
+        .features-list li::before {
+            content: '✓';
+            color: var(--primary-color);
+            font-weight: bold;
         }
 
-        /* Static version info */
-        .mc-static-version-info {
-            background-color: #0f131a;
-            border: 1px solid #3e4e68;
-            color: #a0aec0;
-            padding: 10px 12px;
-            font-size: 0.85rem;
-            border-radius: 4px;
+        /* Platform Selector */
+        .platform-section h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .platform-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .platform-card {
+            background: #171c27;
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .platform-card:hover {
+            border-color: #3e4e68;
+        }
+
+        .platform-card.active {
+            border-color: var(--primary-color);
+            background: rgba(255, 76, 41, 0.05);
+            color: var(--primary-color);
+        }
+
+        /* Dropdown Control */
+        .dropdown-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .custom-dropdown {
+            background: #171c27;
+            border: 1px solid var(--panel-border);
+            color: #fff;
+            padding: 14px 16px;
+            font-size: 0.9rem;
+            border-radius: 8px;
             width: 100%;
-            margin-bottom: 15px;
-            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
         }
 
-        .mc-static-version-info strong {
+        .custom-dropdown:hover {
+            border-color: var(--primary-color);
+        }
+
+        .dropdown-arrow {
+            transition: transform 0.2s;
+            font-size: 0.8rem;
+        }
+
+        .dropdown-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 105%;
+            left: 0;
+            right: 0;
+            background: #171c27;
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            z-index: 50;
+            display: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            max-height: 160px;
+            overflow-y: auto;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background: #202736;
             color: #fff;
         }
 
-        /* Modernized Play Button */
-        .mc-btn-play {
+        /* Main Download Button */
+        .btn-download-hub {
             display: block;
-            background: linear-gradient(135deg, #479a2e 0%, #347221 100%);
+            background: var(--green-btn);
+            color: #fff;
             border: none;
             outline: none;
-            color: #fff;
             text-align: center;
             text-decoration: none;
-            padding: 14px;
-            font-size: 1.15rem;
+            padding: 16px;
+            font-size: 1.2rem;
             font-weight: bold;
             text-transform: uppercase;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
-            border-radius: 6px;
-            box-shadow: 0 4px 15px rgba(52, 114, 33, 0.4);
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(52, 114, 33, 0.3);
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
 
-        .mc-btn-play:hover {
+        .btn-download-hub:hover {
             transform: translateY(-2px);
-            background: linear-gradient(135deg, #56b339 0%, #3c8527 100%);
-            box-shadow: 0 6px 20px rgba(71, 154, 46, 0.6);
+            background: var(--green-hover);
+            box-shadow: 0 8px 25px rgba(71, 154, 46, 0.5);
         }
 
-        .mc-btn-play:active {
-            transform: translateY(1px);
-        }
-
-        .mc-btn-play span {
+        .btn-download-hub span {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-transform: none;
-            text-shadow: none;
-            color: #d1fae5;
             font-weight: normal;
-            margin-top: 2px;
+            color: #d1fae5;
+            margin-top: 3px;
         }
 
-        /* Download Counter Style */
-        .download-counter {
+        .counter-label {
+            display: block;
+            text-align: center;
+            margin-top: 12px;
             font-size: 0.85rem;
             color: #10b981;
+            font-weight: bold;
+        }
+
+        /* Generic Tab Box styling */
+        .generic-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .generic-box h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--panel-border);
+            padding-bottom: 10px;
+        }
+
+        /* Screenshots Grid */
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
             margin-top: 10px;
-            display: block;
-            text-align: center;
-            font-weight: bold;
-            text-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
         }
 
-        /* Standard Disabled Download Button */
-        .btn-download {
-            display: block;
-            background-color: #202632;
-            color: #5a6a85;
-            text-decoration: none;
-            padding: 12px 20px;
+        .screenshot-card {
+            background: #171c27;
+            border: 1px solid var(--panel-border);
+            border-radius: 10px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
             font-weight: bold;
-            border-radius: 6px;
-            border: 1px solid #2d3748;
-            transition: all 0.3s ease;
-            cursor: not-allowed;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            text-align: center;
+            font-style: italic;
+            position: relative;
+            overflow: hidden;
+            border: 2px dashed #333;
         }
 
-        .btn-download span {
-            display: block;
-            font-size: 0.75rem;
-            text-transform: none;
-            color: #5a6a85;
-            margin-top: 2px;
+        /* Author Profile card */
+        .author-card {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-top: 25px;
+        }
+
+        .author-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ff2a00 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .author-details h3 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .btn-coffee-box {
+            margin-top: 25px;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid #141923;
-            color: #5a6a85;
-            font-size: 0.9rem;
-        }
-
-        footer p {
-            margin-bottom: 10px;
-        }
-
-        footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
+            padding: 30px;
+            margin-top: auto;
+            border-top: 1px solid var(--panel-border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
+            .launcher-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2.6rem; }
         }
     </style>
 </head>
 <body>
 
+    <div class="top-bar">
+        <button class="lang-btn" id="langBtn">EN</button>
+    </div>
+
     <header>
-        <h1>Into The Flames</h1>
-        <p class="subtitle">Step into the fire. Save lives. Gear up for the ultimate firefighting experience.</p>
-        
-        <a href="https://buycoffee.to/ewewerban" target="_blank" class="btn-support">
-            ☕ Support Me (BuyCoffee)
-        </a>
+        <h1 data-key="main-title">Into The Flames</h1>
+        <p class="subtitle" data-key="main-subtitle">Krzyknij wyzwanie żywiołom. Ratuj ludzkie życia. Zbuduj karierę w straży pożarnej.</p>
     </header>
 
-    <main class="chapters-container">
-        <h2 class="section-title">Game Chapters</h2>
-        
-        <div class="grid">
-            <div class="chapter-card">
-                <span class="status-badge" style="background-color: rgba(16, 185, 129, 0.15); color: #10b981; border-color: #10b981;">Ready to Download</span>
-                <div class="chapter-info">
-                    <h3>Chapter 1</h3>
-                    <p>First contact with the elements. Learn the basic controls, master firefighting equipment, and respond to your first emergencies.</p>
+    <nav class="nav-tabs">
+        <button class="tab-btn active" data-tab="download" data-key="tab-download">Pobierz</button>
+        <button class="tab-btn" data-tab="about" data-key="tab-about">O grze</button>
+        <button class="tab-btn" data-tab="screenshots" data-key="tab-gallery">Galeria</button>
+        <button class="tab-btn" data-tab="author" data-key="tab-author">Autor</button>
+    </nav>
+
+    <main class="main-container">
+
+        <section class="tab-content active" id="download">
+            <div class="launcher-grid">
+                <div class="info-side">
+                    <h2 data-key="ch1-title">Rozdział 1: Pierwsze Starcie</h2>
+                    <p data-key="ch1-desc">Opanuj podstawowe techniki gaszenia pożarów i sterowania zaawansowanym wozem bojowym. Twój pierwszy alarm czeka.</p>
+                    <ul class="features-list">
+                        <li data-key="feat-1">Pełny samouczek mechaniki pożarów</li>
+                        <li data-key="feat-2">Realistyczny system rozprzestrzeniania dymu</li>
+                        <li data-key="feat-3">Tryb piaskownicy (Sandbox Mode)</li>
+                    </ul>
                 </div>
-                
-                <div class="mc-launcher-widget">
-                    <div class="mc-header">
-                        <div class="mc-icon">🔥</div>
-                        <div class="mc-meta">
-                            <div class="mc-version-name">Latest Release</div>
-                            <span class="mc-version-tag">Alpha 0.1</span>
+
+                <div class="control-side">
+                    <div class="platform-section">
+                        <h4 data-key="select-platform">Wybierz platformę:</h4>
+                        <div class="platform-selector">
+                            <div class="platform-card active" data-os="windows">Windows</div>
+                            <div class="platform-card" data-os="mac">macOS</div>
+                            <div class="platform-card" data-os="linux">Linux</div>
                         </div>
                     </div>
-                    
-                    <div class="mc-static-version-info">
-                        Active version: <strong>Alpha 0.1</strong>
+
+                    <div class="platform-section">
+                        <h4 data-key="select-version">Wybierz wersję:</h4>
+                        <div class="dropdown-container">
+                            <div class="custom-dropdown" id="dropdownToggle">
+                                <span id="selected-version-label">Alpha 0.1 (Active)</span>
+                                <span class="dropdown-arrow" id="dropdownArrow">▼</span>
+                            </div>
+                            <div class="dropdown-menu" id="dropdownMenu">
+                                </div>
+                        </div>
                     </div>
 
-                    <a href="https://drive.google.com/uc?export=download&confirm=t&id=1cj-HwCcKqZLQ2Nac_udlAVaFD8Pzu5ZR" id="downloadBtn" class="mc-btn-play" target="_blank">
-                        Play / Download
-                        <span>Windows (.exe)</span>
+                    <a href="#" id="downloadBtn" class="btn-download-hub" target="_blank">
+                        <span data-key="btn-play">Zagraj / Pobierz</span>
+                        <span id="extension-badge">Windows (.exe)</span>
                     </a>
-
-                    <span class="download-counter" id="counter-text">Downloads: ...</span>
+                    <span class="counter-label" id="counter-display">Pobrania: ...</span>
                 </div>
             </div>
+        </section>
 
-            <div class="chapter-card">
-                <span class="status-badge">Unavailable</span>
-                <div class="chapter-info">
-                    <h3>Chapter 2</h3>
-                    <p>More challenging scenarios in dense urban areas. Coordinate your actions and fight against time during advanced structural fires.</p>
-                </div>
-                <a href="#" class="btn-download" onclick="event.preventDefault();">
-                    Download Chapter 2
-                    <span>Coming soon to Windows</span>
-                </a>
+        <section class="tab-content" id="about">
+            <div class="generic-box">
+                <h2 data-key="about-heading">O projekcie Into The Flames</h2>
+                <p data-key="about-text-1">Into The Flames to niezależny symulator strażacki tworzony z pasji, skupiający się na odwzorowaniu nieprzewidywalności ognia i ciężkich warunkach pracy służb ratunkowych.</p>
+                <br>
+                <p data-key="about-text-2">Gra oferuje zaawansowany silnik fizyczny ognia oraz dynamiczne misje generowane losowo w otwartym świecie małego miasteczka.</p>
             </div>
+        </section>
 
-            <div class="chapter-card">
-                <span class="status-badge">Unavailable</span>
-                <div class="chapter-info">
-                    <h3>Chapter 3</h3>
-                    <p>The final missions and highly dangerous industrial disaster scenarios. Designed only for veteran firefighters.</p>
+        <section class="tab-content" id="screenshots">
+            <div class="generic-box">
+                <h2 data-key="gallery-heading">Zrzuty ekranu z rozgrywki</h2>
+                <div class="screenshot-grid">
+                    <div class="screenshot-card">[Screen 1 - Pożar Domu]</div>
+                    <div class="screenshot-card">[Screen 2 - Wnętrze Wozu]</div>
+                    <div class="screenshot-card">[Screen 3 - Akcja w Nocy]</div>
                 </div>
-                <a href="#" class="btn-download" onclick="event.preventDefault();">
-                    Download Chapter 3
-                    <span>Coming soon to Windows</span>
-                </a>
             </div>
-        </div>
+        </section>
+
+        <section class="tab-content" id="author">
+            <div class="generic-box">
+                <h2 data-key="author-heading">Poznaj twórcę</h2>
+                <div class="author-card">
+                    <div class="author-avatar">🧑‍💻</div>
+                    <div class="author-details">
+                        <h3>ewewerban</h3>
+                        <p data-key="author-bio">Niezależny deweloper, pasjonat gier symulacyjnych oraz programowania. Projekt Into The Flames rozwija w pojedynkę w wolnym czasie.</p>
+                    </div>
+                </div>
+                <div class="btn-coffee-box">
+                    <a href="https://buycoffee.to/ewewerban" target="_blank" class="btn-support" style="display:inline-flex; align-items:center; gap:10px; background:linear-gradient(135deg, #ff4c29 0%, #ff2a00 100%); color:#fff; text-decoration:none; padding:14px 30px; font-size:1rem; font-weight:bold; border-radius:50px; box-shadow:0 4px 15px rgba(255,76,41,0.4); text-transform:uppercase;">
+                        ☕ Wspieraj na BuyCoffee
+                    </a>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer>
-        <p>&copy; 2026 Into The Flames. All rights reserved.</p>
-        <p>Website built for GitHub Pages. Support the creator at <a href="https://buycoffee.to/ewewerban" target="_blank">buycoffee.to/ewewerban</a></p>
+        <p>&copy; 2026 Into The Flames. All rights reserved. Created by ewewerban.</p>
     </footer>
 
     <script>
+        // Dictionary Databases for Versions & File Identifiers
+        const buildDatabase = {
+            windows: [
+                { version: "Alpha 0.1", id: "1cj-HwCcKqZLQ2Nac_udlAVaFD8Pzu5ZR", ext: "Windows (.exe)" },
+                { version: "Alpha 0.0.9", id: "PROBKA_ID_WIN_OLD", ext: "Windows (.exe)" }
+            ],
+            mac: [
+                { version: "Alpha 0.1-macOS", id: "PROBKA_ID_MAC_LATEST", ext: "macOS (.dmg)" }
+            ],
+            linux: [
+                { version: "Alpha 0.1-Linux", id: "PROBKA_ID_LINUX_LATEST", ext: "Linux (.tar.gz)" }
+            ]
+        };
+
+        // Language Translation Library
+        const langPack = {
+            pl: {
+                "main-title": "Into The Flames",
+                "main-subtitle": "Krzyknij wyzwanie żywiołom. Ratuj ludzkie życia. Zbuduj karierę w straży pożarnej.",
+                "tab-download": "Pobierz",
+                "tab-about": "O grze",
+                "tab-gallery": "Galeria",
+                "tab-author": "Autor",
+                "ch1-title": "Rozdział 1: Pierwsze Starcie",
+                "ch1-desc": "Opanuj podstawowe techniki gaszenia pożarów i sterowania zaawansowanym wozem bojowym. Twój pierwszy alarm czeka.",
+                "feat-1": "Pełny samouczek mechaniki pożarów",
+                "feat-2": "Realistyczny system rozprzestrzeniania dymu",
+                "feat-3": "Tryb piaskownicy (Sandbox Mode)",
+                "select-platform": "Wybierz platformę:",
+                "select-version": "Wybierz wersję:",
+                "btn-play": "Zagraj / Pobierz",
+                "counter-txt": "Pobrania: ",
+                "about-heading": "O projekcie Into The Flames",
+                "about-text-1": "Into The Flames to niezależny symulator strażacki tworzony z pasji, skupiający się na odwzorowaniu nieprzewidywalności ognia i ciężkich warunkach pracy służb ratunkowych.",
+                "about-text-2": "Gra oferuje zaawansowany silnik fizyczny ognia oraz dynamiczne misje generowane losowo w otwartym świecie małego miasteczka.",
+                "gallery-heading": "Zrzuty ekranu z rozgrywki",
+                "author-heading": "Poznaj twórcę",
+                "author-bio": "Niezależny deweloper, pasjonat gier symulacyjnych oraz programowania. Projekt Into The Flames rozwija w pojedynkę w wolnym czasie."
+            },
+            en: {
+                "main-title": "Into The Flames",
+                "main-subtitle": "Defy the elements. Save human lives. Forge your ultimate firefighting career.",
+                "tab-download": "Download",
+                "tab-about": "About",
+                "tab-gallery": "Screenshots",
+                "tab-author": "Author",
+                "ch1-title": "Chapter 1: First Contact",
+                "ch1-desc": "Master basic firefighting techniques and drive advanced response vehicles. Your first distress call awaits.",
+                "feat-1": "Full firefighting mechanics tutorial",
+                "feat-2": "Realistic smoke propagation system",
+                "feat-3": "Fully featured Sandbox Mode",
+                "select-platform": "Select target platform:",
+                "select-version": "Select game version:",
+                "btn-play": "Play / Download",
+                "counter-txt": "Downloads: ",
+                "about-heading": "About Into The Flames",
+                "about-text-1": "Into The Flames is a passion-driven indie firefighting simulator focusing on the unpredictable nature of fires and high-stakes rescue missions.",
+                "about-text-2": "The game features an advanced fire physics engine and randomly generated dynamic missions set within a small town open world layout.",
+                "gallery-heading": "In-game Screenshots",
+                "author-heading": "Meet the Developer",
+                "author-bio": "Independent developer passionate about simulation games and software engineering. Developing Into The Flames single-handedly during spare hours."
+            }
+        };
+
+        // Current App State Tracking variables
+        let currentLanguage = 'pl';
+        let currentOS = 'windows';
+        let selectedBuild = buildDatabase.windows[0];
+
+        // Element Selectors
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const platformCards = document.querySelectorAll('.platform-card');
+        const dropdownToggle = document.getElementById('dropdownToggle');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const dropdownArrow = document.getElementById('dropdownArrow');
+        const selectedVersionLabel = document.getElementById('selected-version-label');
+        const extensionBadge = document.getElementById('extension-badge');
         const downloadBtn = document.getElementById('downloadBtn');
-        const counterText = document.getElementById('counter-text');
+        const counterDisplay = document.getElementById('counter-display');
+        const langBtn = document.getElementById('langBtn');
 
-        // Tutaj ustawiliśmy początkową liczbę pobrań na 3
-        const startingDownloads = 3; 
+        // --- 1. LANGUAGE SWAPPER CORE ---
+        langBtn.addEventListener('click', () => {
+            currentLanguage = currentLanguage === 'pl' ? 'en' : 'pl';
+            langBtn.textContent = currentLanguage.toUpperCase();
+            
+            // Re-render strings inside data-key containers
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if(langPack[currentLanguage][key]) {
+                    // If element is the main button, change only first child text node
+                    if(key === 'btn-play') {
+                        el.childNodes[0].textContent = langPack[currentLanguage][key];
+                    } else {
+                        el.textContent = langPack[currentLanguage][key];
+                    }
+                }
+            });
+            updateCounterView();
+        });
 
-        // Sprawdzamy czy w przeglądarce są już zapisane kliknięcia użytkownika
-        let localClicks = parseInt(localStorage.getItem('itf_download_clicks')) || 0;
+        // --- 2. TABS NAV SYSTEM ---
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabButtons.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
 
-        // Funkcja aktualizująca tekst licznika
-        function updateCounterDisplay() {
-            counterText.textContent = `Downloads: ${startingDownloads + localClicks}`;
+                btn.classList.add('active');
+                document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+
+        // --- 3. RE-POPULATE DROPDOWN LIST BASED ON OS ---
+        function rebuildDropdown(os) {
+            dropdownMenu.innerHTML = '';
+            const builds = buildDatabase[os];
+            
+            builds.forEach((b, index) => {
+                const item = document.createElement('div');
+                item.className = 'dropdown-item';
+                item.textContent = b.version;
+                item.addEventListener('click', () => {
+                    selectBuildTarget(b);
+                });
+                dropdownMenu.appendChild(item);
+            });
+
+            // Auto-select latest index build for new platform
+            selectBuildTarget(builds[0]);
         }
 
-        // Uruchamiamy od razu po załadowaniu strony
-        updateCounterDisplay();
+        function selectBuildTarget(buildObj) {
+            selectedBuild = buildObj;
+            selectedVersionLabel.textContent = `${buildObj.version} (${currentLanguage === 'pl' ? 'Aktywna' : 'Active'})`;
+            extensionBadge.textContent = buildObj.ext;
+            
+            // Build absolute direct download link syntax
+            downloadBtn.href = `https://drive.google.com/uc?export=download&confirm=t&id=${buildObj.id}`;
+            updateCounterView();
+        }
 
-        // Po kliknięciu w pobieranie zwiększamy licznik o 1
-        downloadBtn.addEventListener('click', () => {
-            localClicks++;
-            localStorage.setItem('itf_download_clicks', localClicks);
-            updateCounterDisplay();
+        // --- 4. PLATFORM SELECT CARDS ---
+        platformCards.forEach(card => {
+            card.addEventListener('click', () => {
+                platformCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                currentOS = card.getAttribute('data-os');
+                rebuildDropdown(currentOS);
+            });
         });
+
+        // --- 5. DROPDOWN VISIBILITY TOGGLES ---
+        dropdownToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+            dropdownArrow.classList.toggle('open');
+        });
+
+        window.addEventListener('click', () => {
+            dropdownMenu.classList.remove('show');
+            dropdownArrow.classList.remove('open');
+        });
+
+        // --- 6. LOCAL PERSISTENT DOWNLOAD COUNTER SYSTEM ---
+        function getStorageKey() {
+            return `itf_clicks_${currentOS}_${selectedBuild.version.replace(/\s+/g, '')}`;
+        }
+
+        function updateCounterView() {
+            const baseValue = 3; // Zaczynamy od 3 pobrań zgodnie z życzeniem
+            let persistentClicks = parseInt(localStorage.getItem(getStorageKey())) || 0;
+            
+            const txtPrefix = langPack[currentLanguage]["counter-txt"];
+            counterDisplay.textContent = `${txtPrefix}${baseValue + persistentClicks}`;
+        }
+
+        // Action click registration
+        downloadBtn.addEventListener('click', (e) => {
+            // Check if mock placeholder link is used
+            if(selectedBuild.id.includes("PROBKA_ID")) {
+                e.preventDefault();
+                alert(currentLanguage === 'pl' 
+                    ? "Ten plik nie został jeszcze wgrany na Dysk Google. Wybierz wersję Windows (Alpha 0.1), aby przetestować pobieranie."
+                    : "This platform target has no file assigned yet. Choose Windows (Alpha 0.1) to test the download mechanics."
+                );
+                return;
+            }
+
+            let persistentClicks = parseInt(localStorage.getItem(getStorageKey())) || 0;
+            persistentClicks++;
+            localStorage.setItem(getStorageKey(), persistentClicks);
+            updateCounterView();
+        });
+
+        // Initial setup run upon framework mount
+        rebuildDropdown('windows');
+
     </script>
 </body>
 </html>
